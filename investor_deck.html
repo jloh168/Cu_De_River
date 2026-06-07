@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cu De RiverView — Investor Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dark: #8B6914;
+    --ink: #0D0D0D;
+    --ink-soft: #1A1A1A;
+    --cream: #F5F0E8;
+    --cream-dark: #EAE3D4;
+    --river: #2C5F6E;
+    --river-light: #3D7A8A;
+    --river-pale: #C8DDE2;
+    --red: #C0392B;
+    --green: #1E7A4A;
+    --text-muted: #666;
+    --border: rgba(201,168,76,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--ink);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(13,13,13,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600; letter-spacing: 0.12em;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.1em; color: var(--cream-dark);
+    text-decoration: none; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.1em; padding: 0.5rem 1.2rem;
+    border: 1px solid var(--gold); color: var(--gold);
+    background: transparent; cursor: pointer;
+    text-transform: uppercase; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--ink); }
+
+  /* ── SLIDES ── */
+  .slide {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 10vw 5rem;
+    position: relative; overflow: hidden;
+  }
+
+  /* ── SLIDE 1: HERO ── */
+  #hero {
+    background: var(--ink);
+    align-items: flex-start;
+    padding-top: 12rem;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 50%, rgba(44,95,110,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 40% at 20% 80%, rgba(201,168,76,0.08) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: linear-gradient(var(--gold) 1px, transparent 1px),
+      linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .tag {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.18em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .tag::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--gold); }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    font-weight: 300; line-height: 1.05;
+    color: var(--cream); margin-bottom: 0.3rem;
+  }
+  h1 em { font-style: italic; color: var(--gold-light); }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 300; font-style: italic;
+    color: var(--river-pale); margin-bottom: 2.5rem;
+  }
+  .hero-stats {
+    display: flex; gap: 3rem; margin-bottom: 3rem; flex-wrap: wrap;
+  }
+  .hero-stat { border-left: 2px solid var(--gold); padding-left: 1rem; }
+  .hero-stat .val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 600; color: var(--gold);
+    line-height: 1;
+  }
+  .hero-stat .lbl {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.1em; color: var(--text-muted);
+    text-transform: uppercase; margin-top: 0.3rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; }
+  .btn-primary {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.1em; padding: 0.9rem 2rem;
+    background: var(--gold); color: var(--ink);
+    border: none; cursor: pointer; text-transform: uppercase;
+    transition: all 0.2s; text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-outline {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.1em; padding: 0.9rem 2rem;
+    background: transparent; color: var(--cream);
+    border: 1px solid rgba(245,240,232,0.3); cursor: pointer;
+    text-transform: uppercase; transition: all 0.2s; text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--cream); }
+
+  .scroll-indicator {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    opacity: 0.4;
+  }
+  .scroll-indicator span {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 3rem;
+    background: linear-gradient(to bottom, var(--cream), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+  /* ── SECTION HEADER ── */
+  .slide-num {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.18em; color: var(--gold); opacity: 0.6;
+    text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4.5vw, 4rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--cream); margin-bottom: 0.5rem;
+  }
+  h2 em { font-style: italic; color: var(--gold-light); }
+  .section-intro {
+    font-size: 1.05rem; color: rgba(245,240,232,0.65);
+    max-width: 55ch; line-height: 1.7; margin-bottom: 3rem;
+    font-weight: 300;
+  }
+  .divider {
+    width: 3rem; height: 2px; background: var(--gold);
+    margin: 1.2rem 0 2rem;
+  }
+
+  /* ── SLIDE 2: OPPORTUNITY ── */
+  #opportunity { background: var(--ink-soft); }
+  .opp-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; margin-top: 1rem;
+  }
+  .opp-card {
+    background: rgba(44,95,110,0.12);
+    border: 1px solid rgba(44,95,110,0.3);
+    padding: 2rem; position: relative;
+    transition: border-color 0.3s;
+  }
+  .opp-card:hover { border-color: var(--river-light); }
+  .opp-card .icon {
+    font-size: 1.8rem; margin-bottom: 1rem;
+  }
+  .opp-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400; color: var(--gold-light);
+    margin-bottom: 0.8rem;
+  }
+  .opp-card p {
+    font-size: 0.9rem; color: rgba(245,240,232,0.65);
+    line-height: 1.7; font-weight: 300;
+  }
+  .opp-highlight {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(44,95,110,0.12));
+    border: 1px solid var(--border);
+    padding: 2rem;
+    display: flex; align-items: center; gap: 3rem;
+  }
+  .opp-highlight .big-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem; font-weight: 300; color: var(--gold);
+    white-space: nowrap; line-height: 1;
+  }
+  .opp-highlight .big-num span {
+    font-size: 1.5rem; vertical-align: super;
+  }
+  .opp-highlight p {
+    font-size: 0.95rem; color: rgba(245,240,232,0.7);
+    line-height: 1.7; font-weight: 300;
+  }
+
+  /* ── SLIDE 3: TWO PHASES ── */
+  #phases { background: var(--ink); }
+  .phases-wrap {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+  }
+  .phase-card {
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    position: relative;
+  }
+  .phase-card::before {
+    content: attr(data-phase);
+    position: absolute; top: -1px; left: 2rem;
+    background: var(--gold); color: var(--ink);
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+  }
+  .phase-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300; color: var(--cream);
+    margin: 1rem 0 0.5rem;
+  }
+  .phase-card .phase-years {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    color: var(--gold); letter-spacing: 0.1em; margin-bottom: 1.5rem;
+  }
+  .phase-metrics { display: flex; flex-direction: column; gap: 1rem; }
+  .phase-metric { display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid rgba(245,240,232,0.08); padding-bottom: 0.75rem;
+  }
+  .phase-metric .mlbl {
+    font-size: 0.82rem; color: rgba(245,240,232,0.55); font-weight: 300;
+  }
+  .phase-metric .mval {
+    font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--cream);
+  }
+  .phase-metric .mval.gold { color: var(--gold); }
+
+  /* ── SLIDE 4: FINANCIALS ── */
+  #financials { background: var(--ink-soft); }
+  .fin-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem; }
+  .fin-left {}
+  .roi-box {
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05));
+    border: 1px solid var(--gold);
+    padding: 2.5rem; text-align: center; margin-bottom: 1.5rem;
+  }
+  .roi-box .roi-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem; font-weight: 300; color: var(--gold); line-height: 1;
+  }
+  .roi-box .roi-lbl {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.15em; color: var(--text-muted);
+    text-transform: uppercase; margin-top: 0.5rem;
+  }
+  .roi-box .roi-sub {
+    font-size: 0.85rem; color: rgba(245,240,232,0.5); margin-top: 0.5rem;
+  }
+  .invest-stack { display: flex; flex-direction: column; gap: 0.75rem; }
+  .invest-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.75rem 1rem;
+    background: rgba(245,240,232,0.04);
+    border-left: 3px solid transparent;
+  }
+  .invest-row.highlight { border-left-color: var(--gold); background: rgba(201,168,76,0.06); }
+  .invest-row .ikey { font-size: 0.83rem; color: rgba(245,240,232,0.6); font-weight: 300; }
+  .invest-row .ival { font-family: 'DM Mono', monospace; font-size: 0.88rem; color: var(--cream); }
+  .invest-row .ival.gold { color: var(--gold); }
+
+  .fin-right {}
+  .proj-table { width: 100%; border-collapse: collapse; }
+  .proj-table th {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); padding: 0.6rem 0.8rem; text-align: right;
+    border-bottom: 1px solid var(--border);
+  }
+  .proj-table th:first-child { text-align: left; }
+  .proj-table td {
+    padding: 0.8rem; font-family: 'DM Mono', monospace; font-size: 0.78rem;
+    text-align: right; color: rgba(245,240,232,0.7);
+    border-bottom: 1px solid rgba(245,240,232,0.05);
+  }
+  .proj-table td:first-child {
+    text-align: left; color: var(--gold); font-weight: 500;
+  }
+  .proj-table tr:hover td { background: rgba(245,240,232,0.03); }
+  .proj-table .lp-col { color: var(--cream); }
+  .totals-row td { 
+    color: var(--cream) !important; border-top: 1px solid var(--border);
+    font-weight: 500;
+  }
+  .cumulative-box {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem; margin-top: 1.5rem;
+  }
+  .cum-item {
+    padding: 1rem; border: 1px solid var(--border); text-align: center;
+  }
+  .cum-item .cv {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 400; color: var(--gold); line-height: 1;
+  }
+  .cum-item .cl {
+    font-family: 'DM Mono', monospace; font-size: 0.58rem;
+    letter-spacing: 0.08em; color: var(--text-muted);
+    text-transform: uppercase; margin-top: 0.3rem;
+  }
+
+  /* ── SLIDE 5: STRUCTURE ── */
+  #structure { background: var(--ink); }
+  .struct-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; }
+  .waterfall { }
+  .wf-title {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .wf-step {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  .wf-num {
+    width: 2rem; height: 2rem; border-radius: 50%;
+    background: var(--gold); color: var(--ink);
+    font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 0.1rem;
+  }
+  .wf-body h4 {
+    font-size: 0.92rem; font-weight: 500; color: var(--cream); margin-bottom: 0.25rem;
+  }
+  .wf-body p {
+    font-size: 0.82rem; color: rgba(245,240,232,0.55); line-height: 1.6; font-weight: 300;
+  }
+  .wf-connector {
+    width: 1px; height: 1rem; background: var(--border);
+    margin-left: 1rem; margin-bottom: 0;
+  }
+  .split-vis { }
+  .split-bar {
+    height: 3rem; display: flex; border: 1px solid var(--border);
+    overflow: hidden; margin-bottom: 1rem;
+  }
+  .split-lp {
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--ink);
+    font-weight: 500; width: 80%;
+  }
+  .split-gp {
+    background: rgba(245,240,232,0.1); width: 20%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace; font-size: 0.7rem; color: rgba(245,240,232,0.5);
+  }
+  .expense-list { display: flex; flex-direction: column; gap: 0.6rem; }
+  .exp-row {
+    display: flex; justify-content: space-between;
+    padding: 0.6rem 0; border-bottom: 1px solid rgba(245,240,232,0.06);
+  }
+  .exp-row .ek { font-size: 0.82rem; color: rgba(245,240,232,0.55); font-weight: 300; }
+  .exp-row .ev { font-family: 'DM Mono', monospace; font-size: 0.82rem; color: var(--cream); }
+
+  /* ── SLIDE 6: TIMELINE ── */
+  #timeline { background: var(--ink-soft); }
+  .tl-wrap { position: relative; padding-left: 2rem; }
+  .tl-line {
+    position: absolute; left: 0; top: 0.75rem; bottom: 0.75rem;
+    width: 2px; background: linear-gradient(to bottom, var(--gold), var(--river));
+  }
+  .tl-item {
+    display: flex; gap: 2rem; margin-bottom: 2rem;
+    position: relative;
+  }
+  .tl-dot {
+    width: 0.75rem; height: 0.75rem; border-radius: 50%;
+    background: var(--gold); border: 2px solid var(--ink-soft);
+    position: absolute; left: -2.375rem; top: 0.2rem; flex-shrink: 0;
+  }
+  .tl-dot.river { background: var(--river-light); }
+  .tl-time {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    color: var(--gold); letter-spacing: 0.08em;
+    white-space: nowrap; padding-top: 0.15rem; min-width: 6rem;
+  }
+  .tl-time.river { color: var(--river-pale); }
+  .tl-content h4 { font-size: 0.95rem; font-weight: 500; color: var(--cream); margin-bottom: 0.2rem; }
+  .tl-content p { font-size: 0.82rem; color: rgba(245,240,232,0.5); line-height: 1.6; font-weight: 300; }
+
+  /* ── SLIDE 7: RISKS ── */
+  #risks { background: var(--ink); }
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .risk-card {
+    padding: 1.5rem; border: 1px solid transparent;
+    background: rgba(245,240,232,0.03);
+    transition: all 0.3s;
+  }
+  .risk-card.critical { border-color: rgba(192,57,43,0.4); background: rgba(192,57,43,0.06); }
+  .risk-card.high { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.04); }
+  .risk-card.medium { border-color: rgba(44,95,110,0.3); background: rgba(44,95,110,0.05); }
+  .risk-badge {
+    display: inline-block; padding: 0.2rem 0.6rem;
+    font-family: 'DM Mono', monospace; font-size: 0.58rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .risk-badge.critical { background: var(--red); color: #fff; }
+  .risk-badge.high { background: rgba(201,168,76,0.3); color: var(--gold-light); }
+  .risk-badge.medium { background: rgba(44,95,110,0.4); color: var(--river-pale); }
+  .risk-card h4 { font-size: 0.9rem; font-weight: 500; color: var(--cream); margin-bottom: 0.5rem; }
+  .risk-card p { font-size: 0.8rem; color: rgba(245,240,232,0.5); line-height: 1.6; font-weight: 300; }
+  .risk-mit {
+    margin-top: 0.75rem; padding-top: 0.75rem;
+    border-top: 1px solid rgba(245,240,232,0.06);
+    font-size: 0.78rem; color: rgba(245,240,232,0.4);
+    font-style: italic;
+  }
+  .risk-mit::before { content: 'Mitigation: '; font-style: normal; color: rgba(245,240,232,0.3); }
+
+  /* ── SLIDE 8: LEGAL ── */
+  #legal { background: var(--ink-soft); }
+  .legal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .legal-card {
+    border: 1px solid var(--border); padding: 2rem;
+  }
+  .legal-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 400; color: var(--gold-light);
+    margin-bottom: 1.2rem;
+  }
+  .legal-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .legal-list li {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    font-size: 0.83rem; color: rgba(245,240,232,0.6); line-height: 1.6; font-weight: 300;
+  }
+  .legal-list li::before { content: '→'; color: var(--gold); flex-shrink: 0; margin-top: 0.05rem; }
+  .spv-box {
+    grid-column: 1 / -1;
+    background: rgba(44,95,110,0.12); border: 1px solid rgba(44,95,110,0.3);
+    padding: 1.5rem 2rem;
+    display: flex; gap: 2rem; align-items: center;
+  }
+  .spv-box .spv-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.1em; color: var(--river-pale); text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .spv-box p { font-size: 0.85rem; color: rgba(245,240,232,0.6); line-height: 1.6; font-weight: 300; }
+
+  /* ── SLIDE 9: CTA ── */
+  #cta {
+    background: var(--ink);
+    text-align: center; align-items: center;
+    justify-content: center;
+  }
+  .cta-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%);
+  }
+  #cta h2 { font-size: clamp(3rem, 6vw, 5.5rem); }
+  .cta-details {
+    display: flex; gap: 4rem; margin: 3rem 0; justify-content: center; flex-wrap: wrap;
+  }
+  .cta-detail { text-align: center; }
+  .cta-detail .dv {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300; color: var(--gold); line-height: 1;
+  }
+  .cta-detail .dl {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem;
+    letter-spacing: 0.12em; color: var(--text-muted);
+    text-transform: uppercase; margin-top: 0.4rem;
+  }
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; }
+  .disclaimer {
+    margin-top: 4rem; font-size: 0.72rem; color: rgba(245,240,232,0.25);
+    max-width: 60ch; line-height: 1.7; text-align: center;
+    font-style: italic;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    position: fixed; top: 0; left: 0; height: 2px;
+    background: var(--gold); z-index: 200;
+    transition: width 0.1s;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    animation: fadeUp 0.8s ease forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in:nth-child(1) { animation-delay: 0.1s; }
+  .fade-in:nth-child(2) { animation-delay: 0.2s; }
+  .fade-in:nth-child(3) { animation-delay: 0.3s; }
+  .fade-in:nth-child(4) { animation-delay: 0.4s; }
+  .fade-in:nth-child(5) { animation-delay: 0.5s; }
+
+  /* responsive */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .slide { padding: 7rem 5vw 4rem; }
+    .opp-grid, .phases-wrap, .fin-layout, .struct-grid,
+    .legal-grid, .risk-grid { grid-template-columns: 1fr; }
+    .opp-highlight { flex-direction: column; gap: 1rem; }
+    .cumulative-box { grid-template-columns: 1fr; }
+    .spv-box { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav>
+  <div class="nav-logo">Cu De RiverView</div>
+  <div class="nav-links">
+    <a href="#opportunity">Opportunity</a>
+    <a href="#phases">Model</a>
+    <a href="#financials">Financials</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#risks">Risks</a>
+    <a href="#legal">Legal</a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Invest Now</button>
+</nav>
+
+<!-- ═══════════════════════════════════════ SLIDE 1: HERO -->
+<section class="slide" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="tag fade-in">Confidential Investment Opportunity · June 2026</div>
+  <h1 class="fade-in">Cu De<br><em>RiverView</em></h1>
+  <p class="hero-sub fade-in">Da Nang, Vietnam · 32 Hectares</p>
+
+  <div class="hero-stats fade-in">
+    <div class="hero-stat">
+      <div class="val">23.2×</div>
+      <div class="lbl">LP Return (5yr)</div>
+    </div>
+    <div class="hero-stat">
+      <div class="val">$1M</div>
+      <div class="lbl">LP Minimum</div>
+    </div>
+    <div class="hero-stat">
+      <div class="val">$55M+</div>
+      <div class="lbl">Land Exit Value</div>
+    </div>
+    <div class="hero-stat">
+      <div class="val">5 mo</div>
+      <div class="lbl">To First Revenue</div>
+    </div>
+  </div>
+
+  <div class="hero-actions fade-in">
+    <a href="#opportunity" class="btn-primary">Explore the Opportunity</a>
+    <a href="#financials" class="btn-outline">View Financials</a>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SLIDE 2: OPPORTUNITY -->
+<section class="slide" id="opportunity">
+  <div class="slide-num">01 — Market Opportunity</div>
+  <h2>Vietnam is <em>building</em><br>at historic scale</h2>
+  <div class="divider"></div>
+  <p class="section-intro">A convergence of infrastructure demand, prime location, and a buyer-operated model creates a rare low-risk, high-return land play in Southeast Asia's fastest-developing corridor.</p>
+
+  <div class="opp-grid">
+    <div class="opp-card">
+      <div class="icon">🛣️</div>
+      <h3>Highway Infrastructure Boom</h3>
+      <p>Vietnam is constructing over 5,000 km of new highways. Each kilometer requires massive volumes of fill soil — creating sustained, government-backed demand for exactly what this land provides.</p>
+    </div>
+    <div class="opp-card">
+      <div class="icon">✈️</div>
+      <h3>Da Nang — Strategic Hub</h3>
+      <p>Vietnam's 3rd largest airport, undergoing major expansion. Prime corridor linking Hanoi and Ho Chi Minh City. Lower land cost than both cities with significantly higher appreciation potential.</p>
+    </div>
+    <div class="opp-card">
+      <div class="icon">⚙️</div>
+      <h3>Zero-CAPEX Extraction Model</h3>
+      <p>Buyers handle all excavation machinery, labor, and transport. We sell at the mine gate and supervise output. Our capital is protected; operational risk sits entirely with the buyer.</p>
+    </div>
+    <div class="opp-card">
+      <div class="icon">📋</div>
+      <h3>Deposit-Funded Acquisition</h3>
+      <p>The $1.7M deferred seller balance is funded by 25% pre-order deposits from soil buyers — meaning the land effectively pays for itself after the initial down payment.</p>
+    </div>
+    <div class="opp-highlight">
+      <div class="big-num">5,000<span>+</span></div>
+      <p>Kilometers of new Vietnamese highway planned for construction — generating an unprecedented, government-backed demand for fill soil. Our 32-hectare site sits at the epicenter of this demand, near Da Nang's expanding airport and the country's central infrastructure corridor.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SLIDE 3: TWO PHASES -->
+<section class="slide" id="phases">
+  <div class="slide-num">02 — Profit Model</div>
+  <h2>Two phases.<br><em>Two exits.</em></h2>
+  <div class="divider"></div>
+  <p class="section-intro">The project generates substantial cash flow from soil extraction in years 1–5, then delivers a transformational exit through land sale to real estate developers.</p>
+
+  <div class="phases-wrap">
+    <div class="phase-card" data-phase="Phase 1">
+      <h3>Soil Extraction</h3>
+      <div class="phase-years">Years 1 – 5</div>
+      <div class="phase-metrics">
+        <div class="phase-metric">
+          <span class="mlbl">Total Reserves</span>
+          <span class="mval">5,000,000 m³</span>
+        </div>
+        <div class="phase-metric">
+          <span class="mlbl">Annual Extraction</span>
+          <span class="mval">1,000,000 m³</span>
+        </div>
+        <div class="phase-metric">
+          <span class="mlbl">Price per m³</span>
+          <span class="mval">$1.50 (conservative)</span>
+        </div>
+        <div class="phase-metric">
+          <span class="mlbl">Annual Revenue</span>
+          <span class="mval gold">$6,840,000</span>
+        </div>
+        <div class="phase-metric">
+          <span class="mlbl">LP 5-Year Return</span>
+          <span class="mval gold">$23,230,640</span>
+        </div>
+        <div class="phase-metric">
+          <span class="mlbl">Daily Truck Movements</span>
+          <span class="mval">256 (128 loaded)</span>
+        </div>
+        <div class="phase-metric">
+          <span class="mlbl">First Revenue</span>
+          <span class="mval">Month 5–7</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase-card" data-phase="Phase 2">
+      <h3>Land Exit</h3>
+      <div class="phase-years">Year 5+</div>
+      <div class="phase-metrics">
+        <div class="phase-metric">
+          <span class="mlbl">Land Condition</span>
+          <span class="mval">Fully leveled</span>
+        </div>
+        <div class="phase-metric">
+          <span class="mlbl">Target Buyers</span>
+          <span class="mval">Real estate developers</span>
+        </div>
+        <div class="phase-metric">
+          <span class="mlbl">Development Types</span>
+          <span class="mval">Eco-tourism, commercial, residential</span>
+        </div>
+        <div class="phase-metric">
+          <span class="mlbl">Da Nang Annual Appreciation</span>
+          <span class="mval">8–12%</span>
+        </div>
+        <div class="phase-metric">
+          <span class="mlbl">Conservative Exit Value</span>
+          <span class="mval gold">$55,000,000</span>
+        </div>
+        <div class="phase-metric">
+          <span class="mlbl">Total Project Value</span>
+          <span class="mval gold">$83M+ combined</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SLIDE 4: FINANCIALS -->
+<section class="slide" id="financials">
+  <div class="slide-num">03 — Financial Model</div>
+  <h2>The <em>numbers</em></h2>
+  <div class="divider"></div>
+
+  <div class="fin-layout">
+    <div class="fin-left">
+      <div class="roi-box">
+        <div class="roi-num">23.2×</div>
+        <div class="roi-lbl">LP Return on $1M Investment</div>
+        <div class="roi-sub">Over 5 years · $23.2M total returned</div>
+      </div>
+
+      <div class="invest-stack">
+        <div class="invest-row">
+          <span class="ikey">Total Land Cost</span>
+          <span class="ival">$3,700,000</span>
+        </div>
+        <div class="invest-row">
+          <span class="ikey">Operating Reserve</span>
+          <span class="ival">$300,000</span>
+        </div>
+        <div class="invest-row highlight">
+          <span class="ikey">Total Investment</span>
+          <span class="ival gold">$4,000,000</span>
+        </div>
+        <div class="invest-row">
+          <span class="ikey">LP Investment</span>
+          <span class="ival">$1,000,000</span>
+        </div>
+        <div class="invest-row">
+          <span class="ikey">GP Investment</span>
+          <span class="ival">$1,000,000</span>
+        </div>
+        <div class="invest-row">
+          <span class="ikey">Down Payment</span>
+          <span class="ival">$2,000,000</span>
+        </div>
+        <div class="invest-row highlight">
+          <span class="ikey">Deferred Balance</span>
+          <span class="ival gold">$1,700,000 from deposits</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fin-right">
+      <table class="proj-table">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Revenue</th>
+            <th>Expenses</th>
+            <th>Bal. Pmt</th>
+            <th>LP Dist.</th>
+            <th>GP Dist.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Yr 1</td>
+            <td>$6.84M</td>
+            <td>$606,340</td>
+            <td>$1.70M</td>
+            <td class="lp-col">$3.83M</td>
+            <td>$707K</td>
+          </tr>
+          <tr>
+            <td>Yr 2</td>
+            <td>$6.84M</td>
+            <td>$706,366</td>
+            <td>—</td>
+            <td class="lp-col">$4.85M</td>
+            <td>$1.21M</td>
+          </tr>
+          <tr>
+            <td>Yr 3</td>
+            <td>$6.84M</td>
+            <td>$706,366</td>
+            <td>—</td>
+            <td class="lp-col">$4.85M</td>
+            <td>$1.21M</td>
+          </tr>
+          <tr>
+            <td>Yr 4</td>
+            <td>$6.84M</td>
+            <td>$706,366</td>
+            <td>—</td>
+            <td class="lp-col">$4.85M</td>
+            <td>$1.21M</td>
+          </tr>
+          <tr>
+            <td>Yr 5</td>
+            <td>$6.84M</td>
+            <td>$706,366</td>
+            <td>—</td>
+            <td class="lp-col">$4.85M</td>
+            <td>$1.21M</td>
+          </tr>
+          <tr class="totals-row">
+            <td>Total</td>
+            <td>$34.2M</td>
+            <td>$3.43M</td>
+            <td>$1.7M</td>
+            <td class="lp-col">$23.23M</td>
+            <td>$5.56M</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="cumulative-box">
+        <div class="cum-item">
+          <div class="cv">$23.2M</div>
+          <div class="cl">LP 5-Year Total</div>
+        </div>
+        <div class="cum-item">
+          <div class="cv">$28.8M</div>
+          <div class="cl">Combined Profit</div>
+        </div>
+        <div class="cum-item">
+          <div class="cv">$55M+</div>
+          <div class="cl">Land Exit (Yr 5+)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SLIDE 5: STRUCTURE -->
+<section class="slide" id="structure">
+  <div class="slide-num">04 — Deal Structure</div>
+  <h2>How the <em>deal</em> works</h2>
+  <div class="divider"></div>
+
+  <div class="struct-grid">
+    <div class="waterfall">
+      <div class="wf-title">Capital Waterfall</div>
+
+      <div class="wf-step">
+        <div class="wf-num">1</div>
+        <div class="wf-body">
+          <h4>Down Payment — $2,000,000</h4>
+          <p>$1M LP + $1M GP paid immediately. Triggers Red Book (title) transfer to project company. No further capital required from LP.</p>
+        </div>
+      </div>
+      <div class="wf-connector"></div>
+
+      <div class="wf-step">
+        <div class="wf-num">2</div>
+        <div class="wf-body">
+          <h4>Deferred Balance — $1,700,000</h4>
+          <p>Paid from 25% soil pre-order deposits collected from buyers. Clears seller financing. Red Book held as collateral until settled.</p>
+        </div>
+      </div>
+      <div class="wf-connector"></div>
+
+      <div class="wf-step">
+        <div class="wf-num">3</div>
+        <div class="wf-body">
+          <h4>Revenue Distribution</h4>
+          <p>After management fee (1%), reserve (0.5%), and government partner (10% net), remaining profit is split 80/20 LP/GP.</p>
+        </div>
+      </div>
+      <div class="wf-connector"></div>
+
+      <div class="wf-step">
+        <div class="wf-num">4</div>
+        <div class="wf-body">
+          <h4>LP Priority Capital Return</h4>
+          <p>Year 1 LP distributions first return the full $1M capital investment. GP begins receiving profit share only after LP is made whole.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="split-vis">
+      <div class="wf-title" style="margin-bottom:1rem;">Profit Split (After Expenses)</div>
+      <div class="split-bar">
+        <div class="split-lp">LP — 80%</div>
+        <div class="split-gp">GP 20%</div>
+      </div>
+      <p style="font-size:0.78rem;color:rgba(245,240,232,0.4);margin-bottom:2rem;font-style:italic;">LP receives priority return of $1M capital before GP participates</p>
+
+      <div class="wf-title" style="margin-bottom:1rem;">Company Expenses</div>
+      <div class="expense-list">
+        <div class="exp-row">
+          <span class="ek">Management Fee</span>
+          <span class="ev">1% of revenue</span>
+        </div>
+        <div class="exp-row">
+          <span class="ek">Company Reserve</span>
+          <span class="ev">0.5% of revenue</span>
+        </div>
+        <div class="exp-row">
+          <span class="ek">Government Partner (ABC Co.)</span>
+          <span class="ev">10% of net profit</span>
+        </div>
+        <div class="exp-row">
+          <span class="ek">Withholding Tax (est.)</span>
+          <span class="ev">5–10% on distributions</span>
+        </div>
+      </div>
+
+      <div style="margin-top:2rem;padding:1.2rem;border:1px solid var(--border);background:rgba(201,168,76,0.04);">
+        <div style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-bottom:0.5rem;">Seller Protection</div>
+        <p style="font-size:0.82rem;color:rgba(245,240,232,0.55);line-height:1.6;font-weight:300;">15% annual interest applies if balance payment is delayed beyond agreed Red Book transfer date. Red Book deed held as primary collateral.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SLIDE 6: TIMELINE -->
+<section class="slide" id="timeline">
+  <div class="slide-num">05 — Project Timeline</div>
+  <h2>From <em>commitment</em><br>to cash flow</h2>
+  <div class="divider"></div>
+  <p class="section-intro">Revenue begins within 5–7 months of the down payment. The deferred balance is self-funded by soil deposits before steady operations commence.</p>
+
+  <div class="tl-wrap">
+    <div class="tl-line"></div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">Month 0</div>
+      <div class="tl-content">
+        <h4>Capital Raise Complete</h4>
+        <p>$2M down payment secured ($1M LP + $1M GP). Red Book transfer initiated with seller.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">Month 1–2</div>
+      <div class="tl-content">
+        <h4>Red Book Received</h4>
+        <p>Full land use rights transferred to project company. Soil pre-orders begin with 25% deposit collection from contractors.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">Month 2–3</div>
+      <div class="tl-content">
+        <h4>Deferred Balance Cleared</h4>
+        <p>$1.7M balance paid to seller from soil pre-order deposits. No additional LP capital required. Red Book collateral released.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">Month 2–7</div>
+      <div class="tl-content">
+        <h4>Permit Applications</h4>
+        <p>Mining license, EIA, Da Nang People's Committee approval, transport permits. Expected 3–5 months to clear.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">Month 5–7</div>
+      <div class="tl-content">
+        <h4>First Revenue</h4>
+        <p>Soil extraction begins. Buyers operate machinery and transport. We supervise output and collect payment at the gate.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot river"></div>
+      <div class="tl-time river">Years 1–5</div>
+      <div class="tl-content">
+        <h4>Steady Operations</h4>
+        <p>1,000,000 m³ extracted per year. $6.84M annual revenue. LP receives $23.2M total over 5 years.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot river"></div>
+      <div class="tl-time river">Year 5+</div>
+      <div class="tl-content">
+        <h4>Land Sale Exit</h4>
+        <p>Fully leveled 32-hectare site sold to real estate developer. Conservative exit valuation: $55,000,000+.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SLIDE 7: RISKS -->
+<section class="slide" id="risks">
+  <div class="slide-num">06 — Risk Assessment</div>
+  <h2>Know the <em>risks</em></h2>
+  <div class="divider"></div>
+  <p class="section-intro">We present risks transparently. US investors in particular should review FCPA compliance before committing capital.</p>
+
+  <div class="risk-grid">
+    <div class="risk-card critical">
+      <span class="risk-badge critical">Critical</span>
+      <h4>FCPA / OFAC Compliance</h4>
+      <p>The 10% profit allocation to "ABC Company (government partner)" raises significant flags under the US Foreign Corrupt Practices Act. US investors face potential criminal liability regardless of Vietnamese legality.</p>
+      <div class="risk-mit">Independent FCPA compliance review of all government-related payments required before US investor commitment.</div>
+    </div>
+
+    <div class="risk-card high">
+      <span class="risk-badge high">High</span>
+      <h4>Foreign Ownership Restrictions</h4>
+      <p>Under Vietnam's 2024 Land Law, foreigners cannot directly own land. The Red Book is held by the local Vietnamese entity. If the nominee structure fails, US investor legal recourse is limited.</p>
+      <div class="risk-mit">Engage reputable Vietnamese law firm. Structure with strong contractual protections and international arbitration clause.</div>
+    </div>
+
+    <div class="risk-card high">
+      <span class="risk-badge high">High</span>
+      <h4>Permitting Uncertainty</h4>
+      <p>The entire revenue model depends on mining/extraction permits within 3–5 months. Permits can be delayed or denied due to government policy shifts, new leadership, or environmental concerns. The $2M down payment is committed with no revenue if permits are denied.</p>
+      <div class="risk-mit">Seek conditional permit approvals before committing full capital. Build government relationships early.</div>
+    </div>
+
+    <div class="risk-card medium">
+      <span class="risk-badge medium">Medium-High</span>
+      <h4>Capital Repatriation & Currency Risk</h4>
+      <p>Profit repatriation from Vietnam requires audited financials, tax clearance, and State Bank compliance. VND has historically depreciated 3–5% annually vs USD, eroding returns for dollar-denominated investors.</p>
+      <div class="risk-mit">Pre-structure repatriation plan with State Bank approval. Consider Singapore SPV for cleaner currency flows.</div>
+    </div>
+
+    <div class="risk-card medium">
+      <span class="risk-badge medium">Medium-High</span>
+      <h4>Legal Enforcement</h4>
+      <p>Vietnam's legal system does not provide protections US investors are accustomed to. "LP priority return" has no statutory backing in Vietnamese corporate law. Contract enforcement is inconsistent.</p>
+      <div class="risk-mit">Include international arbitration clause. Use escrow arrangements for critical milestone payments.</div>
+    </div>
+
+    <div class="risk-card medium">
+      <span class="risk-badge medium">Medium</span>
+      <h4>Soil Market Risk</h4>
+      <p>If infrastructure projects slow or soil prices fall below $1.50/m³, revenue projections are impacted. The conservative $1.50 price (vs $1.50–$2.50 market) provides some buffer.</p>
+      <div class="risk-mit">Secure long-term supply agreements with contractors. 3-vendor model diversifies buyer concentration risk.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SLIDE 8: LEGAL -->
+<section class="slide" id="legal">
+  <div class="slide-num">07 — Legal & Compliance</div>
+  <h2>Structuring for <em>compliance</em></h2>
+  <div class="divider"></div>
+  <p class="section-intro">Proper legal structuring protects both your investment and your ability to repatriate profits. The recommended Singapore SPV structure maximizes compliance and capital mobility.</p>
+
+  <div class="legal-grid">
+    <div class="legal-card">
+      <h3>Required Permits (Vietnam)</h3>
+      <ul class="legal-list">
+        <li>Mining License — Ministry of Natural Resources & Environment</li>
+        <li>Environmental Impact Assessment (EIA)</li>
+        <li>Da Nang People's Committee approval</li>
+        <li>Red Book (Land Use Rights Certificate) — prerequisite</li>
+        <li>Business License & Tax Registration</li>
+        <li>Transport Permit for soil haulage</li>
+      </ul>
+    </div>
+
+    <div class="legal-card">
+      <h3>Foreign Investment Accounts</h3>
+      <ul class="legal-list">
+        <li><strong style="color:var(--gold-light);">DICA</strong> — Direct Investment Capital Account. For companies with &gt;51% foreign ownership. Only DICA-routed capital can be legally repatriated.</li>
+        <li><strong style="color:var(--gold-light);">IICA</strong> — Indirect Investment Capital Account. For 49% foreign / 51% Vietnamese structure. Governed by Circular 03/2025/TT-NHNN (eff. June 2025).</li>
+        <li>SWIFT purpose field must state: "Investment Capital into [Company Name]"</li>
+        <li>Remitting entity must match IRC shareholder name exactly.</li>
+      </ul>
+    </div>
+
+    <div class="spv-box">
+      <div class="spv-tag">⭐ Recommended Structure</div>
+      <p><strong style="color:var(--cream);">Singapore SPV</strong> — Establish a Special Purpose Vehicle in Singapore as the holding entity. Singapore has a favorable tax treaty with Vietnam, significantly easier capital flows in and out, and serves as a clean intermediary for Chinese, US, or other foreign investors routing capital into Vietnam. The Vietnamese project company (49% foreign / 51% Vietnamese) receives capital via IICA from the Singapore entity.</p>
+    </div>
+
+    <div class="legal-card">
+      <h3>Chinese Investor ODI Path</h3>
+      <ul class="legal-list">
+        <li>NDRC filing → Outbound Investment Project Registration Certificate</li>
+        <li>MOFCOM approval → Enterprise Overseas Investment Certificate</li>
+        <li>SAFE registration → Foreign exchange registration at bank</li>
+        <li>Practical alternative: Route via Hong Kong or Singapore holding company</li>
+        <li><strong style="color:var(--red);">Never</strong> use underground exchanges — funds cannot be legally repatriated if not bank-routed</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SLIDE 9: CTA -->
+<section class="slide" id="cta">
+  <div class="cta-bg"></div>
+
+  <div class="tag">Capital Raise — Now Open</div>
+  <h2>Ready to<br><em>invest?</em></h2>
+  <div class="divider" style="margin:1.5rem auto;"></div>
+  <p class="section-intro" style="text-align:center;margin:0 auto 0;">One LP slot available at $1,000,000. Priority given to investors with existing Vietnam or Southeast Asia exposure.</p>
+
+  <div class="cta-details">
+    <div class="cta-detail">
+      <div class="dv">$1M</div>
+      <div class="dl">LP Minimum</div>
+    </div>
+    <div class="cta-detail">
+      <div class="dv">80%</div>
+      <div class="dl">LP Profit Share</div>
+    </div>
+    <div class="cta-detail">
+      <div class="dv">23.2×</div>
+      <div class="dl">Projected LP ROI</div>
+    </div>
+    <div class="cta-detail">
+      <div class="dv">5 yr</div>
+      <div class="dl">Extraction Period</div>
+    </div>
+    <div class="cta-detail">
+      <div class="dv">$55M+</div>
+      <div class="dl">Land Exit Value</div>
+    </div>
+  </div>
+
+  <div class="cta-actions">
+    <a href="mailto:invest@cuderiverview.com" class="btn-primary">Request Full Data Room</a>
+    <a href="#opportunity" class="btn-outline">Review Deck Again</a>
+  </div>
+
+  <p class="disclaimer">This document is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy securities. Past performance is not indicative of future results. All financial projections are estimates based on current assumptions and are subject to change. US investors must conduct independent legal review, including FCPA compliance assessment, prior to investment. This document is confidential and intended solely for the named recipient.</p>
+</section>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('progressBar').style.width = (scrolled / total * 100) + '%';
+  });
+
+  // Intersection observer for fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.opp-card, .phase-card, .risk-card, .legal-card, .tl-item, .cum-item, .invest-row, .wf-step').forEach((el, i) => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(20px)';
+          el.style.transition = `opacity 0.5s ease ${i * 0.08}s, transform 0.5s ease ${i * 0.08}s`;
+          setTimeout(() => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          }, 50);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.slide').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
